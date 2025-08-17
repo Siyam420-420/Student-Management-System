@@ -11,8 +11,22 @@ const studentsSchema = new mongoose.Schema({
     Date:{
         type: Date,
         required: true
-    }
+    },
+    paymentStatus: {
+        type: String,
+        enum: ["PAID", "UNPAID", "PARTIAL"],
+        default: "UNPAID"
+    },
+    dueAmount: {
+        type: Number,
+        default: 0
+    },
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course"
+    }]
 });
+
 
 const Student =mongoose.model("Student", studentsSchema);
 export default Student;
